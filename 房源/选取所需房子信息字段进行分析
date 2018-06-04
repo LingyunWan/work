@@ -1,0 +1,78 @@
+列表页
+需要获取的房子信息如下:
+
+匹配规则不完整,需要组合,得到的str1就是所需的匹配规则
+for i in range(30):
+    if i < 9:
+        lists = str(0) + str(i+1)
+        str0 = '//div[@class="houseList"]/dl[@id="list_D03_' + lists + '")]'
+    else:
+        str0 = '//div[@class="houseList"]/dl[@id="list_D03_' + str(i+1) + '")]'
+
+1. 房子描述(House description): html.xpath('//div[@class="houseList"]/dl[@id="list_D03_01"]//p[@class="title"]')
+            str1 = str0 + '//p[@class="title"]'
+
+2. 厅室数目(Number of rooms): html.xpath('//div[@class="houseList"]/dl[@id="list_D03_01"]//p[@class="mt12"]//text()')[0]
+            str2 = str0 + '//p[@class="mt12"]'
+
+3. 层数(Floor of house): html.xpath('//div[@class="houseList"]/dl[@id="list_D03_01"]//p[@class="mt12"]//text()')[1]
+            str2 = str0 + '//p[@class="mt12"]'
+
+4. 朝向(House orientation): html.xpath('//div[@class="houseList"]/dl[@id="list_D03_01"]//p[@class="mt12"]//text()')[2]
+            str2 = str0 + '//p[@class="mt12"]'
+
+5. 建筑年代(Architectural age): html.xpath('//div[@class="houseList"]/dl[@id="list_D03_01"]//p[@class="mt12"]//text()')[3]
+            str2 = str0 + '//p[@class="mt12"]'
+
+6. 小区名称(Community name): html.xpath('//div[@class="houseList"]/dl[@id="list_D03_01"]//p[@class="mt10"]//text()')[0]
+            str3 = str0 + '//p[@class="mt10"]'
+
+7. 地址(House address): html.xpath('//div[@class="houseList"]/dl[@id="list_D03_01"]//p[@class="mt10"]//text()')[1]
+            str3 = str0 + '//p[@class="mt10"]'
+            另添加房子所属片区
+
+8. 最近地铁站距离(Nearest subway station): html.xpath('//div[@class="php_xueyuanzuopin_liebiao"]//div[contains(@class,"mt8")]//text()')[0]
+            str4 = str0 + '//div[contains(@class,"mt8")]'
+
+9. 建筑面积(Built-up area): html.xpath('//div[@class="php_xueyuanzuopin_liebiao"]//p[contains(@class,"mt8")]//text()')[0]
+            str5 = str0 + '//div[contains(@class,"area")]'
+
+10. 整套价格(Set of prices): html.xpath('//div[@class="php_xueyuanzuopin_liebiao"]//div[@class="moreInfo"]//text()')[0]
+            str6 = str0 + '//div[@class="moreInfo"]'
+
+11. 每平米价格(Per square meter price): html.xpath('//div[@class="php_xueyuanzuopin_liebiao"]//div[@class="moreInfo"]//text()')[1]
+            str6 = str0 + '//div[@class="moreInfo"]'
+
+
+# 房天下获取验证码的网址
+# http://search.fang.com/captcha-verify/?t=1521450215.945&h=aHR0cDovL2VzZi5mYW5nLmNvbS9ob3VzZS9pMzE%3D&c=cmE6MTA2LjM3LjEwMi4xODY7eHJpOjt4ZmY6
+
+t	1521450215.945
+h	aHR0cDovL2VzZi5mYW5nLmNvbS9ob3VzZS9pMzE=
+c	cmE6MTA2LjM3LjEwMi4xODY7eHJpOjt4ZmY6
+
+t	1521450215.945
+h	aHR0cDovL2VzZi5mYW5nLmNvbS9ob3VzZS9pMzE=
+c	cmE6MTA2LjM3LjEwMi4xODY7eHJpOjt4ZmY6
+
+t	1521450215.945
+h	aHR0cDovL2VzZi5mYW5nLmNvbS9ob3VzZS9pMzE=
+c	cmE6MTA2LjM3LjEwMi4xODY7eHJpOjt4ZmY6
+
+
+详情页
+获取房源信息
+
+列表页获取详情页的地址: html.xpath('//p[@class="title"]/a/@href')
+
+1.标题(title):  html.xpath('//div[@id="lpname"]/div[1]/text()')
+2.整套价格(Set of prices):  html.xpath('//div[@class="trl-item_top"]/div/i/text()')'
+3.户型(layout):  html.xpath('//div[@class="tab-cont-right"]/div[contains(@class,"tr-line")][2]/div[contains(@class,"w146")]/div[1]/text()')
+4.建筑面积(Built-up area):  html.xpath('//div[@class="tab-cont-right"]/div[contains(@class,"tr-line")][2]/div[contains(@class,"w182")]/div[1]/text()')
+5.单价(Unit Price):  html.xpath('//div[@class="tab-cont-right"]/div[contains(@class,"tr-line")][2]/div[contains(@class,"w132")]/div[1]/text()')
+6.朝向(Orientation):  html.xpath('//div[@class="tab-cont-right"]/div[contains(@class,"tr-line")][3]/div[contains(@class,"w146")]/div[1]/text()')
+//div[@class="tab-cont-right"]/div[contains(@class,"tr-line")][3]/div[contains(@class,"w182")]/div/text()
+7.楼层(floor):  html.xpath('//div[@class="tab-cont-right"]/div[contains(@class,"tr-line")][3]/div[contains(@class,"w182")]/div/text()')
+8.小区(Residential):  html.xpath('//div[@class="tab-cont-right"]/div[contains(@class,"tr-line")][4]/div[contains(@class,"trl-item2")][1]//a[1]/text()')
+9.区域(region):  html.xpath('//div[@class="tab-cont-right"]/div[contains(@class,"tr-line")][4]/div[contains(@class,"trl-item2")][2]//a/text()')
+10.地铁(subway):  html.xpath('//div[@class="tab-cont-right"]/div[contains(@class,"tr-line")][4]/div[contains(@class,"trl-item2")][1]//span/text()')
